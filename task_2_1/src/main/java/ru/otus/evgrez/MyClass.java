@@ -1,5 +1,4 @@
-import ru.otus.evgrez.ExCopyObject;
-import ru.otus.evgrez.Measurable;
+package ru.otus.evgrez;
 
 public class MyClass implements Measurable {
     private int i = 0;
