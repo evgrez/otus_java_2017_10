@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 public class MyArrayList<T>  implements List<T> {
     private Object[] array;
-    private int memoryArray =10;
+    private int initMemArray =10;
     private int sizeArray=0;
 
     public MyArrayList() {
@@ -13,12 +13,12 @@ public class MyArrayList<T>  implements List<T> {
     }
 
     public MyArrayList(int sizeList) {
-        this.memoryArray=sizeList;
+        this.initMemArray =sizeList;
         initArray();
     }
 
     private void initArray(){
-        array=new Object[memoryArray];
+        array=new Object[initMemArray];
     }
     public int size() {
         return sizeArray;
@@ -39,8 +39,7 @@ public class MyArrayList<T>  implements List<T> {
     }
 
     public Object[] toArray() {
-        if (true) throw new RuntimeException();
-        return new Object[0];
+        return Arrays.copyOf(array, sizeArray);
     }
 
     public <T1> T1[] toArray(T1[] a) {
@@ -57,7 +56,7 @@ public class MyArrayList<T>  implements List<T> {
         return true;
     }
     private void allocMemory(){
-        memoryArray=memoryArray*2;
+        initMemArray = initMemArray *2;
         Object[] temp = new Object[array.length*2];
         java.lang.System.arraycopy(array, 0, temp, 0, array.length);
         array = temp;
@@ -145,13 +144,15 @@ public class MyArrayList<T>  implements List<T> {
         private int cur=0;
 
         public boolean hasNext() {
-            if (cur<sizeArray) return true;
+//            System.out.println("hasNext cur= "+ cur);
+            if (cur+1<sizeArray) return true;
             else return false;
         }
 
         public T next() {
-            if (cur >= sizeArray)
+            if (cur>=sizeArray)
                 throw new IndexOutOfBoundsException();
+//            System.out.println("next cur= "+ cur);
              return (T)array[++cur];
         }
 
