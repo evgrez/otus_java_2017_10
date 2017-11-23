@@ -1,9 +1,10 @@
-// if (true) throw new RuntimeException();
+package ru.otus.evgrez.task3;
+
 
 import java.util.*;
 import java.util.function.Consumer;
 
-public class MyArrayList<T>  implements List<T> {
+public class MyArrayList<T> implements List<T> {
     private Object[] array;
     private int initMemArray =10;
     private int sizeArray=0;
@@ -96,13 +97,15 @@ public class MyArrayList<T>  implements List<T> {
     }
 
     public T get(int index) {
-        if (index>=sizeArray) throw new IndexOutOfBoundsException();
+        if (index>=sizeArray || index<0) throw new IndexOutOfBoundsException();
         return (T)array[index];
     }
 
     public T set(int index, T element) {
-        if (true) throw new RuntimeException();
-        return null;
+        if (index>=sizeArray || index<0) throw new IndexOutOfBoundsException();
+        Object old = array[index];
+        array[index]=element;
+        return (T)old;
     }
 
     public void add(int index, T element) {
@@ -125,8 +128,7 @@ public class MyArrayList<T>  implements List<T> {
     }
 
     public ListIterator<T> listIterator() {
-        if (true) throw new RuntimeException();
-        return null;
+        return new MyIterator();
     }
 
     public ListIterator<T> listIterator(int index) {
@@ -139,12 +141,12 @@ public class MyArrayList<T>  implements List<T> {
         return null;
     }
 
-    class MyIterator implements Iterator<T> {
-        private int next=0;
+    class MyIterator implements Iterator<T>
+            , ListIterator<T>
+    {
         private int cur=0;
 
         public boolean hasNext() {
-//            System.out.println("hasNext cur= "+ cur);
             if (cur+1<sizeArray) return true;
             else return false;
         }
@@ -152,8 +154,7 @@ public class MyArrayList<T>  implements List<T> {
         public T next() {
             if (cur>=sizeArray)
                 throw new IndexOutOfBoundsException();
-//            System.out.println("next cur= "+ cur);
-             return (T)array[++cur];
+            return (T)array[++cur];
         }
 
         public void remove() {
@@ -161,6 +162,40 @@ public class MyArrayList<T>  implements List<T> {
         }
 
         public void forEachRemaining(Consumer<? super T> action) {
+            if (true) throw new RuntimeException();
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            if (true) throw new RuntimeException();
+            return false;
+        }
+
+        @Override
+        public T previous() {
+            if (true) throw new RuntimeException();
+            return null;
+        }
+
+        @Override
+        public int nextIndex() {
+            if (true) throw new RuntimeException();
+            return 0;
+        }
+
+        @Override
+        public int previousIndex() {
+            if (true) throw new RuntimeException();
+            return 0;
+        }
+
+        @Override
+        public void set(T t) {
+            MyArrayList.this.set(cur-1, t);
+        }
+
+        @Override
+        public void add(T t) {
             if (true) throw new RuntimeException();
         }
     }
