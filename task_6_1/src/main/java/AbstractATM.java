@@ -1,6 +1,7 @@
-public abstract class AbstractATM {
+interface AbstractATM {
 
-  abstract boolean takeBankNote(BankNote b);
-  abstract boolean getBankNote(int m);
-  abstract int getBalance();
+  boolean takeBankNote(BankNote bankNote);
+  boolean getBankNote(int bankNote);
+  int getBalance();
+
 }
