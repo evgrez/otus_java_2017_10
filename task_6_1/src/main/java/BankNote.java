@@ -1,4 +1,4 @@
-public abstract class BankNote implements Comparable{
+public class BankNote implements Comparable{
     private int value;
 
     public BankNote(NameBankNote name) {

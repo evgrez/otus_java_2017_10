@@ -44,14 +44,36 @@ public class BankCell implements Comparable{
     }
 
     public int add(){
+        if (!checkFree()){
+            throw new ArithmeticException();
+        }
         this.count++;
-        this.sum=this.count*this.bankNote.getValue()+this.sum;
+        computeSum();
         return this.count;
+    }
+
+    public int delete(){
+        this.count--;
+        computeSum();
+        return this.count;
+    }
+
+    private void computeSum(){
+        this.sum=this.count*this.bankNote.getValue();
     }
 
     @Override
     public int compareTo(Object o) {
-        return this.bankNote.compareTo(o);
+        return this.bankNote.compareTo(((BankCell)o).bankNote);
     }
 
+    @Override
+    public String toString() {
+        return "BankCell{\n" +
+                "bankNote=" + bankNote +"\n"+
+                ", count=" + count +"\n"+
+                ", maxCount=" + maxCount +"\n"+
+                ", sum=" + sum +"\n"+
+                '}';
+    }
 }
