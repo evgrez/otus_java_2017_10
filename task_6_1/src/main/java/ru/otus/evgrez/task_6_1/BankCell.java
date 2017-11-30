@@ -1,12 +1,14 @@
+package ru.otus.evgrez.task_6_1;
+
 public class BankCell implements Comparable{
-   private BankNote bankNote;
-   private int count;
-   private int maxCount;
-   private int sum;
+    private BankNote bankNote;
+    private int count;
+    private int maxCount;
+    private int sum;
 
     public BankCell(BankNote bankNote, int count, int maxCount) {
         if (count>maxCount) {
-                throw new IllegalArgumentException();
+            throw new IllegalArgumentException();
         }
 
         this.bankNote = bankNote;
@@ -40,20 +42,29 @@ public class BankCell implements Comparable{
     }
 
     public boolean checkFree(){
-        return (this.count<this.maxCount) ;
+        return checkFree(1) ;
+    }
+
+    public boolean checkFree(int cnt){
+        return ((this.count+cnt)<=this.maxCount) ;
     }
 
     public int add(){
-        if (!checkFree()){
-            throw new ArithmeticException();
+        return add(1);
+    }
+
+    public int add(int cnt){
+        if (!checkFree(cnt)){
+            throw new IllegalArgumentException();
         }
-        this.count++;
+        this.count=this.count+cnt;
         computeSum();
         return this.count;
     }
 
-    public int delete(){
-        this.count--;
+    public int delete(int cnt){
+        if ((this.count-cnt)<0) throw new IllegalArgumentException();
+        this.count=this.count-cnt;
         computeSum();
         return this.count;
     }
@@ -69,11 +80,11 @@ public class BankCell implements Comparable{
 
     @Override
     public String toString() {
-        return "BankCell{\n" +
-                "bankNote=" + bankNote +"\n"+
-                ", count=" + count +"\n"+
-                ", maxCount=" + maxCount +"\n"+
-                ", sum=" + sum +"\n"+
+        return "BankCell{ " +
+                "bankNote=" + bankNote +
+                ", count=" + count +
+                ", maxCount=" + maxCount +
+                ", sum=" + sum +
                 '}';
     }
 }

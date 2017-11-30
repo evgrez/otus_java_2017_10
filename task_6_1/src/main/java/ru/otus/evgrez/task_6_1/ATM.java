@@ -1,3 +1,5 @@
+package ru.otus.evgrez.task_6_1;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -5,9 +7,7 @@ import java.util.Map;
 
 public class ATM {
     private ArrayList<BankCell> bankCells;
-    private int minBankNote;
     private Map<BankCell,Integer> buffSumma = new HashMap<>();
-    //private int sum;
 
     public ATM(ArrayList<BankCell> bankCells) {
         this.bankCells = bankCells;
@@ -17,24 +17,47 @@ public class ATM {
     public boolean takeBankNote(BankNote b) {
         for (int i = 0; i < this.bankCells.size(); i++) {
             BankCell tmpCell=bankCells.get(i);
-          if(tmpCell.getBankNote().equals(b) & tmpCell.checkFree()){
+            if(tmpCell.getBankNote().equals(b) & tmpCell.checkFree()){
                 tmpCell.add();
-              System.out.println("банкнота добавлена");
-              return true;
-          }
+                System.out.println("банкнота добавлена");
+                return true;
+            }
         }
         System.out.println("банкнота не добавлена: ячейки заполнены");
         return false;
     }
 
     public boolean getBankNote(int summa) {
-        checkGetBankNote(summa);
-        //while
-//        for (int i = 0; i < this.bankCells.size(); i++) {
-//            BankCell tmpCell=bankCells.get(i);
-//            //if tmpCell.
-//        }
+        if (!checkGetBankNote(summa)) return false;
+        buffSumma=computeBankNote(summa);
+        if (buffSumma.isEmpty()) return false;
+
+        buffSumma.forEach((k,v)->{k.delete(v);});
+        System.out.println("сумма в "+ summa +" выдана");
+
         return true;
+    }
+
+    private Map<BankCell,Integer> computeBankNote(int summa){
+        Map<BankCell,Integer> tmpMap = new HashMap<>();
+        int cntBancNote;
+        int tmpsumma=summa;
+        for (int i = bankCells.size()-1; i >= 0; i--) {
+            int v=bankCells.get(i).getBankNote().getValue();
+            if (bankCells.get(i).getCount()<=0 || tmpsumma<v) {
+                continue;
+            }
+            cntBancNote=tmpsumma/bankCells.get(i).getBankNote().getValue();
+            if (cntBancNote>bankCells.get(i).getCount()){
+                cntBancNote=bankCells.get(i).getCount();
+            }
+            tmpMap.put(bankCells.get(i),cntBancNote);
+            tmpsumma=tmpsumma-bankCells.get(i).getBankNote().getValue()*cntBancNote;
+            if (tmpsumma==0) return tmpMap;
+
+        }
+        System.out.println("Невозможно выдать не кратную сумму!");
+        return Collections.EMPTY_MAP;
     }
 
     private boolean checkGetBankNote(int summa){
@@ -50,18 +73,6 @@ public class ATM {
             System.out.println("Денег недостачно");
             return false;
         }
-
-        buffSumma.clear();
-        int cntBancNote;
-        int tmpsumma=summa;
-            for (BankCell bankCell: bankCells) {
-                if (bankCell.getCount()<=0) continue;
-                cntBancNote=tmpsumma/bankCell.getBankNote().getValue();
-                buffSumma.put(bankCell,cntBancNote);
-            }
-            System.out.println(summa);
-
-
         return true;
     }
 
@@ -84,10 +95,8 @@ public class ATM {
 
     @Override
     public String toString() {
-        return "ATM{" + "\n"+
-                "bankCells=" + bankCells +"\n"+
-                ", minBankNote=" + minBankNote +"\n"+
-                //", sum=" + sum +"\n"+
+        return "ATM{" +
+                "bankCells=" + bankCells +
                 '}';
     }
 }

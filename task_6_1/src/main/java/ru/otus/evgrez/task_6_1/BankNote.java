@@ -1,22 +1,24 @@
+package ru.otus.evgrez.task_6_1;
+
 public class BankNote implements Comparable{
     private int value;
 
     public BankNote(NameBankNote name) {
         switch (name)
         {
-            case BANK_NOTE_100:
+            case BANKNOTE_100:
                 this.value = 100;
                 break;
-            case BANK_NOTE_500:
+            case BANKNOTE_500:
                 this.value = 500;
                 break;
-            case BANK_NOTE_1000:
+            case BANKNOTE_1000:
                 this.value = 1000;
                 break;
-            case BANK_NOTE_2000:
+            case BANKNOTE_2000:
                 this.value = 2000;
                 break;
-            case BANK_NOTE_5000:
+            case BANKNOTE_5000:
                 this.value = 5000;
                 break;
         }
