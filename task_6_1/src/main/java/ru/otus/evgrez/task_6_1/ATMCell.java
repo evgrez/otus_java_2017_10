@@ -1,12 +1,12 @@
 package ru.otus.evgrez.task_6_1;
 
-public class BankCell implements Comparable{
+public class ATMCell implements Comparable{
     private BankNote bankNote;
     private int count;
     private int maxCount;
     private int sum;
 
-    public BankCell(BankNote bankNote, int count, int maxCount) {
+    public ATMCell(BankNote bankNote, int count, int maxCount) {
         if (count>maxCount) {
             throw new IllegalArgumentException();
         }
@@ -75,12 +75,12 @@ public class BankCell implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        return this.bankNote.compareTo(((BankCell)o).bankNote);
+        return this.bankNote.compareTo(((ATMCell)o).bankNote);
     }
 
     @Override
     public String toString() {
-        return "BankCell{ " +
+        return "ATMCell{ " +
                 "bankNote=" + bankNote +
                 ", count=" + count +
                 ", maxCount=" + maxCount +

@@ -6,24 +6,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ATM {
-    private ArrayList<BankCell> bankCells;
-    private Map<BankCell,Integer> buffSumma = new HashMap<>();
+    private ArrayList<ATMCell> atmCells;
+    private Map<ATMCell,Integer> buffSumma = new HashMap<>();
 
-    public ATM(ArrayList<BankCell> bankCells) {
-        this.bankCells = bankCells;
-        Collections.sort(bankCells);
+    public ATM(ArrayList<ATMCell> atmCells) {
+        this.atmCells = atmCells;
+        Collections.sort(atmCells);
     }
 
     public boolean takeBankNote(BankNote b) {
-        for (int i = 0; i < this.bankCells.size(); i++) {
-            BankCell tmpCell=bankCells.get(i);
-            if(tmpCell.getBankNote().equals(b) & tmpCell.checkFree()){
+        for (int i = 0; i < this.atmCells.size(); i++) {
+            ATMCell tmpCell=atmCells.get(i);
+            if(tmpCell.getBankNote().equals(b) && tmpCell.checkFree() ){
+                System.out.println("банкнота "+b.getValue() +" добавлена");
                 tmpCell.add();
-                System.out.println("банкнота добавлена");
                 return true;
             }
         }
-        System.out.println("банкнота не добавлена: ячейки заполнены");
+        System.out.println("Невозможно добавить банкноту "+b.getValue());
         return false;
     }
 
@@ -38,21 +38,21 @@ public class ATM {
         return true;
     }
 
-    private Map<BankCell,Integer> computeBankNote(int summa){
-        Map<BankCell,Integer> tmpMap = new HashMap<>();
+    private Map<ATMCell,Integer> computeBankNote(int summa){
+        Map<ATMCell,Integer> tmpMap = new HashMap<>();
         int cntBancNote;
         int tmpsumma=summa;
-        for (int i = bankCells.size()-1; i >= 0; i--) {
-            int v=bankCells.get(i).getBankNote().getValue();
-            if (bankCells.get(i).getCount()<=0 || tmpsumma<v) {
+        for (int i = atmCells.size()-1; i >= 0; i--) {
+            int v=atmCells.get(i).getBankNote().getValue();
+            if (atmCells.get(i).getCount()<=0 || tmpsumma<v) {
                 continue;
             }
-            cntBancNote=tmpsumma/bankCells.get(i).getBankNote().getValue();
-            if (cntBancNote>bankCells.get(i).getCount()){
-                cntBancNote=bankCells.get(i).getCount();
+            cntBancNote=tmpsumma/atmCells.get(i).getBankNote().getValue();
+            if (cntBancNote>atmCells.get(i).getCount()){
+                cntBancNote=atmCells.get(i).getCount();
             }
-            tmpMap.put(bankCells.get(i),cntBancNote);
-            tmpsumma=tmpsumma-bankCells.get(i).getBankNote().getValue()*cntBancNote;
+            tmpMap.put(atmCells.get(i),cntBancNote);
+            tmpsumma=tmpsumma-atmCells.get(i).getBankNote().getValue()*cntBancNote;
             if (tmpsumma==0) return tmpMap;
 
         }
@@ -78,16 +78,16 @@ public class ATM {
 
     public int getBalance() {
         int sum=0;
-        for (int i = 0; i < this.bankCells.size(); i++) {
-            sum=sum+bankCells.get(i).getSum();
+        for (int i = 0; i < this.atmCells.size(); i++) {
+            sum=sum+atmCells.get(i).getSum();
         }
         return sum;
     }
 
     public BankNote getMinBankNote() {
-        for (int i = 0; i < this.bankCells.size(); i++) {
-            if (bankCells.get(i).getCount()>0){
-                return bankCells.get(i).getBankNote();
+        for (int i = 0; i < this.atmCells.size(); i++) {
+            if (atmCells.get(i).getCount()>0){
+                return atmCells.get(i).getBankNote();
             }
         }
         throw new IllegalArgumentException();
@@ -96,7 +96,7 @@ public class ATM {
     @Override
     public String toString() {
         return "ATM{" +
-                "bankCells=" + bankCells +
+                "atmCells=" + atmCells +
                 '}';
     }
 }
