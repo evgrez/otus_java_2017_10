@@ -16,7 +16,7 @@
     </properties>
 
     <build>
-        <finalName>task_2_1</finalName>
+        <finalName>task_3_1</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
