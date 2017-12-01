@@ -30,12 +30,10 @@ public class MyArrayList<T> implements List<T> {
     }
 
     public boolean contains(Object o) {
-        if (true) throw new RuntimeException();
-        return false;
+        throw new RuntimeException();
     }
 
     public Iterator<T> iterator() {
-
         return new MyIterator();
     }
 
@@ -44,8 +42,7 @@ public class MyArrayList<T> implements List<T> {
     }
 
     public <T1> T1[] toArray(T1[] a) {
-        if (true) throw new RuntimeException();
-        return null;
+        throw new RuntimeException();
     }
 
     public boolean add(T t) {
@@ -63,37 +60,31 @@ public class MyArrayList<T> implements List<T> {
         array = temp;
     }
     public boolean remove(Object o) {
-        if (true) throw new RuntimeException();
-        return false;
+        throw new RuntimeException();
     }
 
     public boolean containsAll(Collection<?> c) {
-        if (true) throw new RuntimeException();
-        return false;
+        throw new RuntimeException();
     }
 
     public boolean addAll(Collection<? extends T> c) {
-        if (true) throw new RuntimeException();
-        return false;
+        throw new RuntimeException();
     }
 
     public boolean addAll(int index, Collection<? extends T> c) {
-        if (true) throw new RuntimeException();
-        return false;
+        throw new RuntimeException();
     }
 
     public boolean removeAll(Collection<?> c) {
-        if (true) throw new RuntimeException();
-        return false;
+        throw new RuntimeException();
     }
 
     public boolean retainAll(Collection<?> c) {
-        if (true) throw new RuntimeException();
-        return false;
+        throw new RuntimeException();
     }
 
     public void clear() {
-        if (true) throw new RuntimeException();
+        throw new RuntimeException();
     }
 
     public T get(int index) {
@@ -109,22 +100,19 @@ public class MyArrayList<T> implements List<T> {
     }
 
     public void add(int index, T element) {
-        if (true) throw new RuntimeException();
+        throw new RuntimeException();
     }
 
     public T remove(int index) {
-        if (true) throw new RuntimeException();
-        return null;
+        throw new RuntimeException();
     }
 
     public int indexOf(Object o) {
-        if (true) throw new RuntimeException();
-        return 0;
+        throw new RuntimeException();
     }
 
     public int lastIndexOf(Object o) {
-        if (true) throw new RuntimeException();
-        return 0;
+        throw new RuntimeException();
     }
 
     public ListIterator<T> listIterator() {
@@ -132,19 +120,17 @@ public class MyArrayList<T> implements List<T> {
     }
 
     public ListIterator<T> listIterator(int index) {
-        if (true) throw new RuntimeException();
-        return null;
+        throw new RuntimeException();
     }
 
     public List<T> subList(int fromIndex, int toIndex) {
-        if (true) throw new RuntimeException();
-        return null;
+        throw new RuntimeException();
     }
 
     class MyIterator implements Iterator<T>
             , ListIterator<T>
     {
-        private int cur=0;
+        private int cur=-1;
 
         public boolean hasNext() {
             if (cur+1<sizeArray) return true;
@@ -158,45 +144,41 @@ public class MyArrayList<T> implements List<T> {
         }
 
         public void remove() {
-            if (true) throw new RuntimeException();
+            throw new RuntimeException();
         }
 
         public void forEachRemaining(Consumer<? super T> action) {
-            if (true) throw new RuntimeException();
+            throw new RuntimeException();
         }
 
         @Override
         public boolean hasPrevious() {
-            if (true) throw new RuntimeException();
-            return false;
+            throw new RuntimeException();
         }
 
         @Override
         public T previous() {
-            if (true) throw new RuntimeException();
-            return null;
+            throw new RuntimeException();
         }
 
         @Override
         public int nextIndex() {
-            if (true) throw new RuntimeException();
-            return 0;
+            throw new RuntimeException();
         }
 
         @Override
         public int previousIndex() {
-            if (true) throw new RuntimeException();
-            return 0;
+            throw new RuntimeException();
         }
 
         @Override
         public void set(T t) {
-            MyArrayList.this.set(cur-1, t);
+            MyArrayList.this.set(cur, t);
         }
 
         @Override
         public void add(T t) {
-            if (true) throw new RuntimeException();
+            throw new RuntimeException();
         }
     }
 }
