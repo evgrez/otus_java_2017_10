@@ -4,24 +4,8 @@ public class BankNote implements Comparable{
     private int value;
 
     public BankNote(NameBankNote name) {
-        switch (name)
-        {
-            case BANKNOTE_100:
-                this.value = 100;
-                break;
-            case BANKNOTE_500:
-                this.value = 500;
-                break;
-            case BANKNOTE_1000:
-                this.value = 1000;
-                break;
-            case BANKNOTE_2000:
-                this.value = 2000;
-                break;
-            case BANKNOTE_5000:
-                this.value = 5000;
-                break;
-        }
+        this.value=name.getValue();
+        System.out.println(this.value);
     }
 
     public int getValue() {

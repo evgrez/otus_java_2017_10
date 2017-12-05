@@ -15,7 +15,7 @@ public class Main {
         bankCells.add(b);
         b = new ATMCell(new BankNote(NameBankNote.BANKNOTE_100),10000,10000);
         bankCells.add(b);
-        //System.out.println(bankCells);
+//        System.out.println(bankCells);
 
         System.out.println("Создаем банкомат");
         ATM atm = new ATM(bankCells);
