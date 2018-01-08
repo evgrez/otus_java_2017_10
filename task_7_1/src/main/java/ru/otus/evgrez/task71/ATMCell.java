@@ -1,6 +1,6 @@
 package ru.otus.evgrez.task71;
 
-public class ATMCell implements Comparable{
+public class ATMCell implements Comparable<ATMCell>{
     private BankNote bankNote;
     private int count;
     private int maxCount;
@@ -74,8 +74,8 @@ public class ATMCell implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-        return this.bankNote.compareTo(((ATMCell)o).bankNote);
+    public int compareTo(ATMCell obj) {
+        return this.bankNote.compareTo(obj.bankNote);
     }
 
     @Override

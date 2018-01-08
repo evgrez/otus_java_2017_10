@@ -11,8 +11,8 @@ public class Main {
         res=cs.calcSize();
         System.out.println(res);
 
-        System.out.println("Вычисляем размер \"new String(\"asdzxc\")\"");
-        params = new Object[]{"asdzxc"};
+        System.out.println("Вычисляем размер \"new String(\"1\")\"");
+        params = new Object[]{"1"};
         cs = new CalculatorSize(new MeasSubject(String.class, params), 10_000_000);
         res=cs.calcSize();
         System.out.println(res);
@@ -30,6 +30,12 @@ public class Main {
 
         System.out.println("Вычисляем размер \"new MyClassN\"");
         cs = new CalculatorSize(new MeasSubject(MyClassN.class) , 10_000_000);
+        res=cs.calcSize();
+        System.out.println(res);
+
+        System.out.println("Вычисляем размер \"new int(\"\")\"");
+        params = new Object[]{"1"};
+        cs = new CalculatorSize(new MeasSubject(Integer.class, new Object[]{"1"}), 10_000_000);
         res=cs.calcSize();
         System.out.println(res);
     }

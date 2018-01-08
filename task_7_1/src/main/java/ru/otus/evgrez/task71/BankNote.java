@@ -1,6 +1,6 @@
 package ru.otus.evgrez.task71;
 
-public class BankNote implements Comparable{
+public class BankNote implements Comparable<BankNote>{
     private int value;
 
     public BankNote(NameBankNote name) {
@@ -13,8 +13,8 @@ public class BankNote implements Comparable{
     }
 
     @Override
-    public int compareTo(Object obj) {
-        return Integer.compare(this.value,((BankNote)obj).value);
+    public int compareTo(BankNote obj) {
+        return Integer.compare(this.value,obj.value);
     }
 
     @Override
